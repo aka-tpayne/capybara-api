@@ -1,8 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Controller;
 use App\Models\Capybara;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
 
 class CapybaraController extends Controller
@@ -35,7 +37,15 @@ class CapybaraController extends Controller
      */
     public function store(Request $request)
     {
-        return response()->json($request->all());
+        $validated = $request->validate([
+            'name' => 'bail|required|string|unique:App\Models\Capybara',
+            'size' => 'required|string',
+            'color' => 'required|string',
+        ]);
+
+        $capybara = Capybara::create($validated);
+
+        return response()->json(['created' => true], 201);
     }
 
     /**

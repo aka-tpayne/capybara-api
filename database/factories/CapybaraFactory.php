@@ -22,7 +22,7 @@ class CapybaraFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->name,
+            'name' => $this->faker->unique()->firstName,
             'size' => $this->faker->randomElement(['Tiny', 'Small', 'Medium', 'Large', 'Colossal']),
             'color' => $this->faker->colorName
         ];

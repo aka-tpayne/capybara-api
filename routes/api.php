@@ -1,6 +1,7 @@
 <?php
 
-use App\Http\Controllers\CapybaraController;
+use App\Http\Controllers\Api\CapybaraController;
+use App\Http\Controllers\Api\CapybaraObservationController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -15,4 +16,5 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::post('/capybara', [CapybaraController::class, 'store'])->name('capybara.store');
+Route::post('/capybara', [CapybaraController::class, 'store'])->name('api.capybara.store');
+Route::post('/observation', [CapybaraObservationController::class, 'store'])->name('api.observation.store');

@@ -11,7 +11,7 @@ class Capybara extends Model
 
     protected $guarded = [];
 
-    public function sightings() {
-        return $this->hasMany(CapybaraSighting::class);
+    public function observations() {
+        return $this->hasMany(CapybaraObservation::class);
     }
 }

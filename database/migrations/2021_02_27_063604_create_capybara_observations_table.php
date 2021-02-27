@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCapybaraSightingsTable extends Migration
+class CreateCapybaraObservationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateCapybaraSightingsTable extends Migration
      */
     public function up()
     {
-        Schema::create('capybara_sightings', function (Blueprint $table) {
+        Schema::create('capybara_observations', function (Blueprint $table) {
             $table->id();
             $table->foreignId('capybara_id');
             $table->date('seen_on');
@@ -30,6 +30,6 @@ class CreateCapybaraSightingsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('capybara_sightings');
+        Schema::dropIfExists('capybara_observations');
     }
 }
