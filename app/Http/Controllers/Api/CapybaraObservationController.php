@@ -41,7 +41,7 @@ class CapybaraObservationController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string',
-            'seen_on' => 'required|date_format:Y-m-d',
+            'date' => 'required|date_format:Y-m-d',
             'city' => 'required|string',
             'wearing_hat' => 'boolean'
         ]);
@@ -65,7 +65,7 @@ class CapybaraObservationController extends Controller
         // Check if observation exists already
         $existing_observation = $capybara->observations()->where(Arr::except($validated, ['name', 'wearing_hat']))->count();
         if ($existing_observation > 0) {
-            abort(422, "{$capybara->name} has already been observed in {$validated['city']} on {$validated['seen_on']}.");
+            abort(422, "{$capybara->name} has already been observed in {$validated['city']} on {$validated['date']}.");
         }
 
         $capybara->observations()->create(Arr::except($validated, 'name'));

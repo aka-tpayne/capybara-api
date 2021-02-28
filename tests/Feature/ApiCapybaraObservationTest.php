@@ -16,7 +16,7 @@ class ApiCapybaraObservationTest extends TestCase
         $observation = [
             'name' => 'Steven',
             'city' => 'Chicago',
-            'seen_on' => '2021-02-27',
+            'date' => '2021-02-27',
             'wearing_hat' => false,
         ];
 
@@ -35,7 +35,7 @@ class ApiCapybaraObservationTest extends TestCase
         $observation = [
             'name' => 'Bob',
             'city' => 'Chicago',
-            'seen_on' => '2021-02-27',
+            'date' => '2021-02-27',
             'wearing_hat' => false,
         ];
 
@@ -54,7 +54,7 @@ class ApiCapybaraObservationTest extends TestCase
         $successful_observation = [
             'name' => 'Steven',
             'city' => 'Chicago',
-            'seen_on' => '2021-02-27',
+            'date' => '2021-02-27',
             'wearing_hat' => false,
         ];
 
@@ -69,7 +69,7 @@ class ApiCapybaraObservationTest extends TestCase
         $failed_observation = [
             'name' => 'Steven',
             'city' => 'Chicago',
-            'seen_on' => '2021-02-27',
+            'date' => '2021-02-27',
             'wearing_hat' => true,
         ];
 
@@ -78,7 +78,7 @@ class ApiCapybaraObservationTest extends TestCase
         $response
             ->assertStatus(422)
             ->assertJson([
-                'message' => "{$failed_observation['name']} has already been observed in {$failed_observation['city']} on {$failed_observation['seen_on']}.",
+                'message' => "{$failed_observation['name']} has already been observed in {$failed_observation['city']} on {$failed_observation['date']}.",
             ]);
     }
 
@@ -88,7 +88,7 @@ class ApiCapybaraObservationTest extends TestCase
         $chicago_observation = [
             'name' => 'Steven',
             'city' => 'Chicago',
-            'seen_on' => '2021-02-27',
+            'date' => '2021-02-27',
             'wearing_hat' => false,
         ];
 
@@ -103,7 +103,7 @@ class ApiCapybaraObservationTest extends TestCase
         $sf_observation = [
             'name' => 'Steven',
             'city' => 'San Francisco',
-            'seen_on' => '2021-02-27',
+            'date' => '2021-02-27',
             'wearing_hat' => false,
         ];
 
@@ -122,7 +122,7 @@ class ApiCapybaraObservationTest extends TestCase
         $first_day_observation = [
             'name' => 'Steven',
             'city' => 'Chicago',
-            'seen_on' => '2021-02-27',
+            'date' => '2021-02-27',
             'wearing_hat' => false,
         ];
 
@@ -137,7 +137,7 @@ class ApiCapybaraObservationTest extends TestCase
         $second_day_observation = [
             'name' => 'Steven',
             'city' => 'Chicago',
-            'seen_on' => '2021-02-28',
+            'date' => '2021-02-28',
             'wearing_hat' => false,
         ];
 
@@ -156,7 +156,7 @@ class ApiCapybaraObservationTest extends TestCase
         $first_capybara_observation = [
             'name' => 'Steven',
             'city' => 'Chicago',
-            'seen_on' => '2021-02-27',
+            'date' => '2021-02-27',
             'wearing_hat' => false,
         ];
 
@@ -171,7 +171,7 @@ class ApiCapybaraObservationTest extends TestCase
         $second_capybara_observation = [
             'name' => 'Colossus',
             'city' => 'Chicago',
-            'seen_on' => '2021-02-27',
+            'date' => '2021-02-27',
             'wearing_hat' => false,
         ];
 
@@ -190,7 +190,7 @@ class ApiCapybaraObservationTest extends TestCase
         $observation = [
             'name' => 'Steven',
             'city' => 'Tokyo',
-            'seen_on' => '2021-02-27',
+            'date' => '2021-02-27',
             'wearing_hat' => true,
         ];
 

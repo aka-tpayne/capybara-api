@@ -16,7 +16,7 @@ class CreateCapybaraObservationsTable extends Migration
         Schema::create('capybara_observations', function (Blueprint $table) {
             $table->id();
             $table->foreignId('capybara_id');
-            $table->date('seen_on');
+            $table->date('date');
             $table->string('city');
             $table->boolean('wearing_hat')->default(false);
             $table->timestamps();

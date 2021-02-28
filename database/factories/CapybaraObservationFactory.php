@@ -22,7 +22,7 @@ class CapybaraObservationFactory extends Factory
     public function definition()
     {
         return [
-            'seen_on' => $this->faker->dateTimeBetween('-2 years', 'now'),
+            'date' => $this->faker->dateTimeBetween('-2 years', 'now'),
             'city' => $this->faker->randomElement(['Chicago', 'Atlanta', 'New York', 'Houston', 'San Francisco']),
             'wearing_hat' => $this->faker->boolean(42),
         ];
