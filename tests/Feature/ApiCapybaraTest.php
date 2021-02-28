@@ -19,13 +19,14 @@ class CapybaraTest extends TestCase
                 'name' => 'Steven'
             ])
             ->toArray();
-            
+
         $response = $this
             ->handleValidationExceptions()
             ->postJson(route('api.capybara.store'), $newCapybara);
 
-        $this->assertNotEmpty($response->json()['errors']);
-        $this->assertArrayHasKey('name', $response->json()['errors']);
+        $response
+            ->assertStatus(422)
+            ->assertJsonPath('errors.name', ['The name has already been taken.']);
     }
 
     /** @test */
