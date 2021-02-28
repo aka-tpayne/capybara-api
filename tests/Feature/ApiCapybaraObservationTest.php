@@ -51,14 +51,14 @@ class ApiCapybaraObservationTest extends TestCase
     /** @test */
     public function it_cannot_create_duplicate_observation()
     {
-        $observation = [
+        $successful_observation = [
             'name' => 'Steven',
             'city' => 'Chicago',
             'seen_on' => '2021-02-27',
             'wearing_hat' => false,
         ];
 
-        $response = $this->postJson(route('api.observation.store'), $observation);
+        $response = $this->postJson(route('api.observation.store'), $successful_observation);
         
         $response
             ->assertStatus(201)
@@ -66,33 +66,67 @@ class ApiCapybaraObservationTest extends TestCase
                 'created' => true
             ]);
 
-        $observation = [
+        $failed_observation = [
             'name' => 'Steven',
             'city' => 'Chicago',
             'seen_on' => '2021-02-27',
             'wearing_hat' => true,
         ];
 
-        $response = $this->postJson(route('api.observation.store'), $observation);
+        $response = $this->postJson(route('api.observation.store'), $failed_observation);
 
         $response
             ->assertStatus(422)
             ->assertJson([
-                'message' => "{$observation['name']} has already been observed in {$observation['city']} on {$observation['seen_on']}.",
+                'message' => "{$failed_observation['name']} has already been observed in {$failed_observation['city']} on {$failed_observation['seen_on']}.",
             ]);
     }
 
     /** @test */
-    public function it_can_create_multiple_observations_for_different_cities()
+    public function it_can_create_multiple_observations_for_same_capybara_different_cities()
     {
-        $observation = [
+        $chicago_observation = [
             'name' => 'Steven',
             'city' => 'Chicago',
             'seen_on' => '2021-02-27',
             'wearing_hat' => false,
         ];
 
-        $response = $this->postJson(route('api.observation.store'), $observation);
+        $response = $this->postJson(route('api.observation.store'), $chicago_observation);
+        
+        $response
+            ->assertStatus(201)
+            ->assertJson([
+                'created' => true
+            ]);
+        
+        $sf_observation = [
+            'name' => 'Steven',
+            'city' => 'San Francisco',
+            'seen_on' => '2021-02-27',
+            'wearing_hat' => false,
+        ];
+
+        $response = $this->postJson(route('api.observation.store'), $sf_observation);
+
+        $response
+            ->assertStatus(201)
+            ->assertJson([
+                'created' => true
+            ]);
+    }
+
+    /** @test */
+    public function it_can_create_multiple_observations_for_same_capybara_different_dates()
+    {
+        $first_day_observation = [
+            'name' => 'Steven',
+            'city' => 'Chicago',
+            'seen_on' => '2021-02-27',
+            'wearing_hat' => false,
+        ];
+
+        $response = $this->postJson(route('api.observation.store'), $first_day_observation);
         
         $response
             ->assertStatus(201)
@@ -100,15 +134,49 @@ class ApiCapybaraObservationTest extends TestCase
                 'created' => true
             ]);
 
-        $observation = [
+        $second_day_observation = [
             'name' => 'Steven',
-            'city' => 'San Francisco',
+            'city' => 'Chicago',
+            'seen_on' => '2021-02-28',
+            'wearing_hat' => false,
+        ];
+
+        $response = $this->postJson(route('api.observation.store'), $second_day_observation);
+        
+        $response
+            ->assertStatus(201)
+            ->assertJson([
+                'created' => true
+            ]);
+    }
+
+    /** @test */
+    public function it_can_create_multiple_observations_for_different_capybara_same_date_and_city()
+    {
+        $first_capybara_observation = [
+            'name' => 'Steven',
+            'city' => 'Chicago',
             'seen_on' => '2021-02-27',
             'wearing_hat' => false,
         ];
 
-        $response = $this->postJson(route('api.observation.store'), $observation);
+        $response = $this->postJson(route('api.observation.store'), $first_capybara_observation);
+        
+        $response
+            ->assertStatus(201)
+            ->assertJson([
+                'created' => true
+            ]);
 
+        $second_capybara_observation = [
+            'name' => 'Colossus',
+            'city' => 'Chicago',
+            'seen_on' => '2021-02-27',
+            'wearing_hat' => false,
+        ];
+
+        $response = $this->postJson(route('api.observation.store'), $second_capybara_observation);
+        
         $response
             ->assertStatus(201)
             ->assertJson([
